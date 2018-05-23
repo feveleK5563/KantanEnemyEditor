@@ -95,6 +95,11 @@
             this.TransitionList = new System.Windows.Forms.ListBox();
             this.TransitionID = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.BasisRenderY = new System.Windows.Forms.NumericUpDown();
+            this.BasisRenderX = new System.Windows.Forms.NumericUpDown();
             this.MoveList = new System.Windows.Forms.ListBox();
             this.ResetMove = new System.Windows.Forms.Button();
             this.CreateOneMove = new System.Windows.Forms.Button();
@@ -164,6 +169,8 @@
             this.MovePatternPanel.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BasisRenderY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BasisRenderX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WaitTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimationNum)).BeginInit();
@@ -277,6 +284,11 @@
             this.VisibillityD.Name = "VisibillityD";
             this.VisibillityD.Size = new System.Drawing.Size(61, 22);
             this.VisibillityD.TabIndex = 75;
+            this.VisibillityD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // VisibillityH
             // 
@@ -316,6 +328,11 @@
             this.BaseD.Name = "BaseD";
             this.BaseD.Size = new System.Drawing.Size(61, 22);
             this.BaseD.TabIndex = 66;
+            this.BaseD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // BaseH
             // 
@@ -573,6 +590,11 @@
             this.AttackTransD.Name = "AttackTransD";
             this.AttackTransD.Size = new System.Drawing.Size(61, 22);
             this.AttackTransD.TabIndex = 87;
+            this.AttackTransD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // DamageCameraD
             // 
@@ -586,6 +608,11 @@
             this.DamageCameraD.Name = "DamageCameraD";
             this.DamageCameraD.Size = new System.Drawing.Size(61, 22);
             this.DamageCameraD.TabIndex = 72;
+            this.DamageCameraD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // DamageCameraH
             // 
@@ -629,7 +656,7 @@
             this.tabControl1.Location = new System.Drawing.Point(34, 62);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(881, 445);
+            this.tabControl1.Size = new System.Drawing.Size(881, 486);
             this.tabControl1.TabIndex = 87;
             // 
             // tabPage1
@@ -638,7 +665,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(873, 416);
+            this.tabPage1.Size = new System.Drawing.Size(873, 457);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "パラメーターとコリジョンサイズ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -649,9 +676,9 @@
             this.ParameterCollisionPanel.Controls.Add(this.DicisionParamaterAndCollisionSize);
             this.ParameterCollisionPanel.Controls.Add(this.groupBox2);
             this.ParameterCollisionPanel.Controls.Add(this.groupBox1);
-            this.ParameterCollisionPanel.Location = new System.Drawing.Point(3, 3);
+            this.ParameterCollisionPanel.Location = new System.Drawing.Point(51, 17);
             this.ParameterCollisionPanel.Name = "ParameterCollisionPanel";
-            this.ParameterCollisionPanel.Size = new System.Drawing.Size(867, 410);
+            this.ParameterCollisionPanel.Size = new System.Drawing.Size(738, 417);
             this.ParameterCollisionPanel.TabIndex = 88;
             // 
             // groupBox5
@@ -855,7 +882,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(873, 416);
+            this.tabPage2.Size = new System.Drawing.Size(873, 457);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "動作パターン";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -874,7 +901,7 @@
             this.MovePatternPanel.Enabled = false;
             this.MovePatternPanel.Location = new System.Drawing.Point(3, 3);
             this.MovePatternPanel.Name = "MovePatternPanel";
-            this.MovePatternPanel.Size = new System.Drawing.Size(867, 410);
+            this.MovePatternPanel.Size = new System.Drawing.Size(867, 451);
             this.MovePatternPanel.TabIndex = 11;
             // 
             // SetMovePatternID
@@ -949,6 +976,11 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label37);
+            this.groupBox3.Controls.Add(this.label36);
+            this.groupBox3.Controls.Add(this.label35);
+            this.groupBox3.Controls.Add(this.BasisRenderY);
+            this.groupBox3.Controls.Add(this.BasisRenderX);
             this.groupBox3.Controls.Add(this.MoveList);
             this.groupBox3.Controls.Add(this.ResetMove);
             this.groupBox3.Controls.Add(this.CreateOneMove);
@@ -974,10 +1006,63 @@
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Location = new System.Drawing.Point(28, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(488, 326);
+            this.groupBox3.Size = new System.Drawing.Size(488, 361);
             this.groupBox3.TabIndex = 35;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "動作・アニメーション設定";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(68, 209);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(105, 15);
+            this.label37.TabIndex = 44;
+            this.label37.Text = "描画基準位置：";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(254, 189);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(14, 15);
+            this.label36.TabIndex = 43;
+            this.label36.Text = "y";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(183, 189);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(14, 15);
+            this.label35.TabIndex = 42;
+            this.label35.Text = "x";
+            // 
+            // BasisRenderY
+            // 
+            this.BasisRenderY.DecimalPlaces = 1;
+            this.BasisRenderY.Location = new System.Drawing.Point(257, 207);
+            this.BasisRenderY.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.BasisRenderY.Name = "BasisRenderY";
+            this.BasisRenderY.Size = new System.Drawing.Size(65, 22);
+            this.BasisRenderY.TabIndex = 41;
+            // 
+            // BasisRenderX
+            // 
+            this.BasisRenderX.DecimalPlaces = 1;
+            this.BasisRenderX.Location = new System.Drawing.Point(186, 207);
+            this.BasisRenderX.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.BasisRenderX.Name = "BasisRenderX";
+            this.BasisRenderX.Size = new System.Drawing.Size(65, 22);
+            this.BasisRenderX.TabIndex = 40;
             // 
             // MoveList
             // 
@@ -987,12 +1072,12 @@
             "ここに追加"});
             this.MoveList.Location = new System.Drawing.Point(355, 76);
             this.MoveList.Name = "MoveList";
-            this.MoveList.Size = new System.Drawing.Size(111, 229);
+            this.MoveList.Size = new System.Drawing.Size(111, 259);
             this.MoveList.TabIndex = 39;
             // 
             // ResetMove
             // 
-            this.ResetMove.Location = new System.Drawing.Point(31, 286);
+            this.ResetMove.Location = new System.Drawing.Point(31, 313);
             this.ResetMove.Name = "ResetMove";
             this.ResetMove.Size = new System.Drawing.Size(117, 29);
             this.ResetMove.TabIndex = 29;
@@ -1002,7 +1087,7 @@
             // 
             // CreateOneMove
             // 
-            this.CreateOneMove.Location = new System.Drawing.Point(154, 271);
+            this.CreateOneMove.Location = new System.Drawing.Point(154, 298);
             this.CreateOneMove.Name = "CreateOneMove";
             this.CreateOneMove.Size = new System.Drawing.Size(167, 44);
             this.CreateOneMove.TabIndex = 28;
@@ -1012,7 +1097,6 @@
             // 
             // DurationTime
             // 
-            this.DurationTime.DecimalPlaces = 1;
             this.DurationTime.Location = new System.Drawing.Point(211, 76);
             this.DurationTime.Maximum = new decimal(new int[] {
             1000,
@@ -1026,7 +1110,7 @@
             // IsRoop
             // 
             this.IsRoop.AutoSize = true;
-            this.IsRoop.Location = new System.Drawing.Point(257, 238);
+            this.IsRoop.Location = new System.Drawing.Point(257, 266);
             this.IsRoop.Name = "IsRoop";
             this.IsRoop.Size = new System.Drawing.Size(64, 19);
             this.IsRoop.TabIndex = 24;
@@ -1036,7 +1120,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(116, 237);
+            this.label28.Location = new System.Drawing.Point(116, 265);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(57, 15);
             this.label28.TabIndex = 23;
@@ -1045,7 +1129,7 @@
             // WaitTime
             // 
             this.WaitTime.DecimalPlaces = 1;
-            this.WaitTime.Location = new System.Drawing.Point(185, 235);
+            this.WaitTime.Location = new System.Drawing.Point(185, 263);
             this.WaitTime.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1057,7 +1141,7 @@
             // 
             // AnimationNum
             // 
-            this.AnimationNum.Location = new System.Drawing.Point(185, 207);
+            this.AnimationNum.Location = new System.Drawing.Point(185, 235);
             this.AnimationNum.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1075,7 +1159,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(53, 209);
+            this.label27.Location = new System.Drawing.Point(53, 237);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(120, 15);
             this.label27.TabIndex = 20;
@@ -1275,7 +1359,7 @@
             // 
             this.Message.AutoSize = true;
             this.Message.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Message.Location = new System.Drawing.Point(31, 510);
+            this.Message.Location = new System.Drawing.Point(31, 569);
             this.Message.Name = "Message";
             this.Message.Size = new System.Drawing.Size(70, 17);
             this.Message.TabIndex = 88;
@@ -1284,7 +1368,7 @@
             // CreateEnemy
             // 
             this.CreateEnemy.Enabled = false;
-            this.CreateEnemy.Location = new System.Drawing.Point(549, 522);
+            this.CreateEnemy.Location = new System.Drawing.Point(549, 569);
             this.CreateEnemy.Name = "CreateEnemy";
             this.CreateEnemy.Size = new System.Drawing.Size(219, 47);
             this.CreateEnemy.TabIndex = 89;
@@ -1294,7 +1378,7 @@
             // 
             // AllReset
             // 
-            this.AllReset.Location = new System.Drawing.Point(774, 538);
+            this.AllReset.Location = new System.Drawing.Point(774, 585);
             this.AllReset.Name = "AllReset";
             this.AllReset.Size = new System.Drawing.Size(137, 31);
             this.AllReset.TabIndex = 90;
@@ -1304,7 +1388,7 @@
             // 
             // OutputFileName
             // 
-            this.OutputFileName.Location = new System.Drawing.Point(378, 547);
+            this.OutputFileName.Location = new System.Drawing.Point(378, 594);
             this.OutputFileName.Name = "OutputFileName";
             this.OutputFileName.Size = new System.Drawing.Size(165, 22);
             this.OutputFileName.TabIndex = 91;
@@ -1312,7 +1396,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(382, 528);
+            this.label31.Location = new System.Drawing.Point(382, 575);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(118, 15);
             this.label31.TabIndex = 92;
@@ -1322,7 +1406,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 581);
+            this.ClientSize = new System.Drawing.Size(998, 644);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.OutputFileName);
             this.Controls.Add(this.AllReset);
@@ -1378,6 +1462,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BasisRenderY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BasisRenderX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DurationTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WaitTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimationNum)).EndInit();
@@ -1491,6 +1577,11 @@
         private System.Windows.Forms.TextBox OutputFileName;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.ComboBox SetMovePatternID;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.NumericUpDown BasisRenderY;
+        private System.Windows.Forms.NumericUpDown BasisRenderX;
+        private System.Windows.Forms.Label label37;
     }
 }
 

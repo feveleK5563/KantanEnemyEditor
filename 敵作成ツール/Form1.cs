@@ -89,8 +89,10 @@ namespace 敵作成ツール
             {
                 public int moveId;
                 public int skillId;
-                public float durationTime;
+                public int durationTime;
                 public KM_Box2D animSrc;
+                public float basisRenderPosX;
+                public float basisRenderPosY;
                 public int animNum;
                 public float waitTime;
                 public bool isRoop;
@@ -223,8 +225,10 @@ namespace 敵作成ツール
             EnemyMovePattern.EnemyMove setem = new EnemyMovePattern.EnemyMove();
             setem.moveId = MoveID.SelectedIndex;
             setem.skillId = SkillID.SelectedIndex;
-            setem.durationTime = (float)DurationTime.Value;
+            setem.durationTime = (int)DurationTime.Value;
             setem.animSrc.Set(BoxX.Value, BoxY.Value, BoxW.Value, BoxH.Value);
+            setem.basisRenderPosX = (float)BasisRenderX.Value;
+            setem.basisRenderPosY = (float)BasisRenderY.Value;
             setem.animNum = (int)AnimationNum.Value;
             setem.waitTime = (float)WaitTime.Value;
             setem.isRoop = IsRoop.Checked;
@@ -258,6 +262,7 @@ namespace 敵作成ツール
             MoveOrder.Text = nowSettingMove.ToString();
             enemyMSList.ems[nowSettingMovePattern].emp.em.Clear();
             enemyMSList.ems[nowSettingMovePattern].emp.em.Capacity = 0;
+            enemyMSList.ems[nowSettingMovePattern].emp.totalMoveNum = 0;
             IsRoop.Checked = false;
 
             MoveList.Items.Clear();
@@ -412,6 +417,8 @@ namespace 敵作成ツール
                                     enemyMSList.ems[i].emp.em[j].skillId.ToString() + " " +
                                     enemyMSList.ems[i].emp.em[j].durationTime.ToString());
                     sw.Write(   enemyMSList.ems[i].emp.em[j].animSrc.Output() + " " +
+                                enemyMSList.ems[i].emp.em[j].basisRenderPosX.ToString() + " " +
+                                enemyMSList.ems[i].emp.em[j].basisRenderPosY.ToString() + " " +
                                 enemyMSList.ems[i].emp.em[j].animNum.ToString() + " " +
                                 enemyMSList.ems[i].emp.em[j].waitTime.ToString());
                     if (enemyMSList.ems[i].emp.em[j].isRoop == true)    sw.WriteLine(" 1");
