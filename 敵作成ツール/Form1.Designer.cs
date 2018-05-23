@@ -133,6 +133,7 @@
             this.AllReset = new System.Windows.Forms.Button();
             this.OutputFileName = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
+            this.IsUseGrabity = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VisibillityD)).BeginInit();
@@ -362,7 +363,7 @@
             // 
             // MovePatternNum
             // 
-            this.MovePatternNum.Location = new System.Drawing.Point(160, 210);
+            this.MovePatternNum.Location = new System.Drawing.Point(157, 238);
             this.MovePatternNum.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -520,6 +521,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.IsUseGrabity);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label16);
@@ -536,7 +538,7 @@
             this.groupBox1.Controls.Add(this.MovePatternNum);
             this.groupBox1.Location = new System.Drawing.Point(17, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(296, 247);
+            this.groupBox1.Size = new System.Drawing.Size(296, 278);
             this.groupBox1.TabIndex = 85;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "各種パラメータ";
@@ -544,7 +546,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(47, 212);
+            this.label4.Location = new System.Drawing.Point(44, 240);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 15);
             this.label4.TabIndex = 82;
@@ -1402,6 +1404,18 @@
             this.label31.TabIndex = 92;
             this.label31.Text = "出力するファイル名";
             // 
+            // IsUseGrabity
+            // 
+            this.IsUseGrabity.AutoSize = true;
+            this.IsUseGrabity.Checked = true;
+            this.IsUseGrabity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.IsUseGrabity.Location = new System.Drawing.Point(78, 195);
+            this.IsUseGrabity.Name = "IsUseGrabity";
+            this.IsUseGrabity.Size = new System.Drawing.Size(124, 19);
+            this.IsUseGrabity.TabIndex = 83;
+            this.IsUseGrabity.Text = "重力を使用する";
+            this.IsUseGrabity.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1582,6 +1596,7 @@
         private System.Windows.Forms.NumericUpDown BasisRenderY;
         private System.Windows.Forms.NumericUpDown BasisRenderX;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.CheckBox IsUseGrabity;
     }
 }
 

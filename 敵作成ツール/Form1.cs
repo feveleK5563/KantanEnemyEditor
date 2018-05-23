@@ -64,6 +64,7 @@ namespace 敵作成ツール
             public int hitDamage;
             public float moveSpeed;
             public float jumpPower;
+            public int isUseGravity;
         }
         public EnemyParamater enemyParamater = new EnemyParamater();
 
@@ -95,7 +96,7 @@ namespace 敵作成ツール
                 public float basisRenderPosY;
                 public int animNum;
                 public float waitTime;
-                public bool isRoop;
+                public int isRoop;
             }
             public List<EnemyMove> em = new List<EnemyMove>();
         }
@@ -172,6 +173,7 @@ namespace 敵作成ツール
             enemyParamater.hitDamage = (int)HitDamage.Value;
             enemyParamater.moveSpeed = (float)MoveSpeed.Value;
             enemyParamater.jumpPower = (float)JumpPower.Value;
+            enemyParamater.isUseGravity = IsUseGrabity.Checked ? 1 : 0;
 
             //動作パターンの数をここで設定
             enemyMSList.totalPatternNum = (int)MovePatternNum.Value;
@@ -231,7 +233,7 @@ namespace 敵作成ツール
             setem.basisRenderPosY = (float)BasisRenderY.Value;
             setem.animNum = (int)AnimationNum.Value;
             setem.waitTime = (float)WaitTime.Value;
-            setem.isRoop = IsRoop.Checked;
+            setem.isRoop = IsRoop.Checked ? 1 : 0;
 
             int add = MoveList.SelectedIndex;
             //ここに追加を選択していない時
@@ -397,7 +399,7 @@ namespace 敵作成ツール
             sw.WriteLine(enemyParamater.texturePath);
             sw.WriteLine(enemyParamater.textureName);
             sw.WriteLine(enemyParamater.maxLife + " " + enemyParamater.hitDamage + " "+
-                         enemyParamater.moveSpeed + " " + enemyParamater.jumpPower);
+                         enemyParamater.moveSpeed + " " + enemyParamater.jumpPower + " " + enemyParamater.isUseGravity);
             sw.WriteLine(enemyCollision.baseShapeSize.Output());
             sw.WriteLine(enemyCollision.dcPos.Output());
             sw.WriteLine(enemyCollision.dcShapeSize.Output());
@@ -416,19 +418,19 @@ namespace 敵作成ツール
                     sw.WriteLine(   enemyMSList.ems[i].emp.em[j].moveId.ToString() + " " +
                                     enemyMSList.ems[i].emp.em[j].skillId.ToString() + " " +
                                     enemyMSList.ems[i].emp.em[j].durationTime.ToString());
-                    sw.Write(   enemyMSList.ems[i].emp.em[j].animSrc.Output() + " " +
-                                enemyMSList.ems[i].emp.em[j].basisRenderPosX.ToString() + " " +
-                                enemyMSList.ems[i].emp.em[j].basisRenderPosY.ToString() + " " +
-                                enemyMSList.ems[i].emp.em[j].animNum.ToString() + " " +
-                                enemyMSList.ems[i].emp.em[j].waitTime.ToString());
-                    if (enemyMSList.ems[i].emp.em[j].isRoop == true)    sw.WriteLine(" 1");
-                    else                                                sw.WriteLine(" 0");
+                    sw.WriteLine(   enemyMSList.ems[i].emp.em[j].animSrc.Output() + " " +
+                                    enemyMSList.ems[i].emp.em[j].basisRenderPosX.ToString() + " " +
+                                    enemyMSList.ems[i].emp.em[j].basisRenderPosY.ToString() + " " +
+                                    enemyMSList.ems[i].emp.em[j].animNum.ToString() + " " +
+                                    enemyMSList.ems[i].emp.em[j].waitTime.ToString() + " " +
+                                    enemyMSList.ems[i].emp.em[j].isRoop.ToString());
                 }
                 
                 for (int k = 0; k < enemyMSList.totalPatternNum; ++k)
                 {
-                    sw.WriteLine(enemyMSList.ems[i].transitionId[k].ToString());
+                    sw.Write(enemyMSList.ems[i].transitionId[k].ToString() + " ");
                 }
+                sw.WriteLine(" ");
             }
 
             sw.Close();
