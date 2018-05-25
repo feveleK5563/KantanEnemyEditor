@@ -31,7 +31,7 @@ namespace 敵作成ツール
             }
             public string Output()
             {
-                return x.ToString() + " " + y.ToString() + " " + z.ToString();
+                return (x + " " + y + " " + z);
             }
         }
 
@@ -51,8 +51,8 @@ namespace 敵作成ツール
             }
             public string Output()
             {
-                return  x.ToString() + " " + y.ToString() + " " +
-                        w.ToString() + " " + h.ToString();
+                return (x + " " + y + " " +
+                        w + " " + h);
             }
         }
 
@@ -103,7 +103,7 @@ namespace 敵作成ツール
 
         public class EnemyMoveSetList //動作パターンまとめ
         {
-            public int totalPatternNum;
+            public int totalPatternNum = 0;
             public class EnemyMoveSet
             {
                 public EnemyMovePattern emp = new EnemyMovePattern();
@@ -114,26 +114,32 @@ namespace 敵作成ツール
         public EnemyMoveSetList enemyMSList = new EnemyMoveSetList();
         public int nowSettingMove;
         public int nowSettingMovePattern;
+        public bool readFile;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             nowSettingMove = 0;
             nowSettingMovePattern = 0;
+            readFile = false;
             Message.Text = "パラメータとコリジョンサイズ、位置を設定してください";
 
-            //動作IDを設定
+            //-------------------------
+            //動作ID
             MoveID.Items.Add("0：何もしない");
             MoveID.Items.Add("1：向いている方向に移動する");
             MoveID.Items.Add("2：ジャンプする");
             MoveID.Items.Add("3：前方に攻撃用コリジョンを生成する");
 
-            //スキルIDを設定
+            //-------------------------
+            //スキルID
             SkillID.Items.Add("0：何もなし");
 
-            //動作遷移IDを設定
+            //-------------------------
+            //動作遷移ID
             TransitionID.Items.Add("0：遷移しない");
             TransitionID.Items.Add("1：動作パターンが一巡したとき");
             TransitionID.Items.Add("2：視界内にプレイヤーが入っているとき");
+
 
             MoveID.SelectedIndex = 0;
             SkillID.SelectedIndex = 0;
@@ -157,8 +163,7 @@ namespace 敵作成ツール
             DialogResult result = MessageBox.Show("パラメータとコリジョン設定を確定しますか？\n（確定すると以後変更できません）",
                                                     "確認",
                                                     MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Exclamation,
-                                                    MessageBoxDefaultButton.Button2);
+                                                    MessageBoxIcon.Exclamation);
             //「いいえ」が選択された時はキャンセル
             if (result == DialogResult.No)
             {
@@ -176,21 +181,36 @@ namespace 敵作成ツール
             enemyParamater.isUseGravity = IsUseGrabity.Checked ? 1 : 0;
 
             //動作パターンの数をここで設定
-            enemyMSList.totalPatternNum = (int)MovePatternNum.Value;
             PatternOrder.Text = "0";
             MoveOrder.Text = "0";
-            for (int i = 0; i < enemyMSList.totalPatternNum; ++i)
+            for (int i = 0; i < (int)MovePatternNum.Value; ++i)
             {
-                TransitionList.Items.Add(i.ToString() + "： " + 0.ToString() + " " + true.ToString());
-                enemyMSList.ems.Add(new EnemyMoveSetList.EnemyMoveSet());
+                TransitionList.Items.Add(i.ToString() + "： 0 " + true.ToString());
                 SetMovePatternID.Items.Add("動作" + i.ToString());
-                for (int j = 0; j < enemyMSList.totalPatternNum; ++j)
+                if (i < enemyMSList.totalPatternNum)
+                {
+                    for (int j = 0; j < (int)MovePatternNum.Value - enemyMSList.totalPatternNum; ++j)
+                    {
+                        enemyMSList.ems[i].transitionId.Add(new int());
+                        enemyMSList.ems[i].transitionId[j] = 0;
+                    }
+                    continue;
+                }
+
+                enemyMSList.ems.Add(new EnemyMoveSetList.EnemyMoveSet());
+                for (int j = 0; j < (int)MovePatternNum.Value; ++j)
                 {
                     enemyMSList.ems[i].transitionId.Add(new int());
                     enemyMSList.ems[i].transitionId[j] = 0;
                 }
             }
+            enemyMSList.totalPatternNum = (int)MovePatternNum.Value;
             SetMovePatternID.SelectedIndex = 0;
+
+            if (readFile == true)
+            {
+                SettingMoveSet(0);
+            }
 
             //コリジョンの形状を設定
             enemyCollision.baseShapeSize.
@@ -210,6 +230,7 @@ namespace 敵作成ツール
                 Set(AttackTransPosX.Value, AttackTransPosY.Value, AttackTransPosZ.Value);
 
             //以後パラメーターとコリジョンの変更は不可にする
+            //ファイル読み込みもできなくする
             ParameterCollisionPanel.Enabled = false;
             //動作設定が可能にする
             MovePatternPanel.Enabled = true;
@@ -287,16 +308,11 @@ namespace 敵作成ツール
             TransitionList.SelectedIndex = add;
         }
 
-        private void DicisionMovePattern_Click(object sender, EventArgs e)
+        private void SettingMoveSet(int setNum)
         {
-            if (nowSettingMovePattern == SetMovePatternID.SelectedIndex)
-            {
-                return;
-            }
+            nowSettingMovePattern = setNum;
 
-            nowSettingMovePattern = SetMovePatternID.SelectedIndex;
-
-            PatternOrder.Text = SetMovePatternID.SelectedIndex.ToString();
+            PatternOrder.Text = setNum.ToString();
 
             //動作内容をリストボックスに表示
             MoveList.Items.Clear();
@@ -328,13 +344,22 @@ namespace 敵作成ツール
             TransitionList.SelectedIndex = TransitionList.Items.Count - 1;
         }
 
+        private void DicisionMovePattern_Click(object sender, EventArgs e)
+        {
+            if (nowSettingMovePattern == SetMovePatternID.SelectedIndex)
+            {
+                return;
+            }
+
+            SettingMoveSet(SetMovePatternID.SelectedIndex);
+        }
+
         private void AllReset_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("ここまで作成したEnemyの情報をリセットしますがよろしいですか？\n（強制再起動します）",
                                                   "※注意※",
                                                   MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Exclamation,
-                                                  MessageBoxDefaultButton.Button2);
+                                                  MessageBoxIcon.Exclamation);
             //「いいえ」が選択された時はキャンセル
             if (result == DialogResult.No)
             {
@@ -344,8 +369,7 @@ namespace 敵作成ツール
             result = MessageBox.Show("ほんとぉ？",
                                      "※最終確認※",
                                      MessageBoxButtons.YesNo,
-                                     MessageBoxIcon.Exclamation,
-                                     MessageBoxDefaultButton.Button2);
+                                     MessageBoxIcon.Exclamation);
             //「いいえ」が選択された時はキャンセル
             if (result == DialogResult.No)
             {
@@ -381,11 +405,10 @@ namespace 敵作成ツール
                 return;
             }
 
-            DialogResult result = MessageBox.Show("これまで入力した情報をsrcファイルに出力します",
+            DialogResult result = MessageBox.Show("これまで入力した情報をsrcファイルに出力します\n（既に同名のファイルが存在している場合上書きされます）",
                                                   "確認",
                                                   MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Exclamation,
-                                                  MessageBoxDefaultButton.Button1);
+                                                  MessageBoxIcon.Exclamation);
             //「いいえ」が選択された時はキャンセル
             if (result == DialogResult.No)
             {
@@ -396,45 +419,174 @@ namespace 敵作成ツール
             System.IO.StreamWriter sw = new System.IO.StreamWriter(fs);
 
             //パラメータとコリジョン
-            sw.WriteLine(enemyParamater.texturePath);
-            sw.WriteLine(enemyParamater.textureName);
-            sw.WriteLine(enemyParamater.maxLife + " " + enemyParamater.hitDamage + " "+
-                         enemyParamater.moveSpeed + " " + enemyParamater.jumpPower + " " + enemyParamater.isUseGravity);
-            sw.WriteLine(enemyCollision.baseShapeSize.Output());
-            sw.WriteLine(enemyCollision.dcPos.Output());
-            sw.WriteLine(enemyCollision.dcShapeSize.Output());
-            sw.WriteLine(enemyCollision.visibillityPos.Output());
-            sw.WriteLine(enemyCollision.visibillityShapeSize.Output());
-            sw.WriteLine(enemyCollision.attackTransPos.Output());
-            sw.WriteLine(enemyCollision.attackTransShapeSize.Output());
+            sw.WriteLine(enemyParamater.texturePath + " ");
+            sw.WriteLine(enemyParamater.textureName + " ");
+            sw.WriteLine(enemyParamater.maxLife + " " + enemyParamater.hitDamage + " " + enemyParamater.moveSpeed + " " +
+                         enemyParamater.jumpPower + " " + enemyParamater.isUseGravity + " ");
+
+            sw.WriteLine(enemyCollision.baseShapeSize.Output() + " ");
+            sw.WriteLine(enemyCollision.dcPos.Output() + " ");
+            sw.WriteLine(enemyCollision.dcShapeSize.Output() + " ");
+            sw.WriteLine(enemyCollision.visibillityPos.Output() + " ");
+            sw.WriteLine(enemyCollision.visibillityShapeSize.Output() + " ");
+            sw.WriteLine(enemyCollision.attackTransPos.Output() + " ");
+            sw.WriteLine(enemyCollision.attackTransShapeSize.Output() + " ");
 
             //動作パターン
-            sw.WriteLine(enemyMSList.totalPatternNum.ToString());
+            sw.WriteLine(enemyMSList.totalPatternNum + " ");
             for (int i = 0; i < enemyMSList.totalPatternNum; ++i)
             {
-                sw.WriteLine(enemyMSList.ems[i].emp.totalMoveNum.ToString());
+                sw.WriteLine(enemyMSList.ems[i].emp.totalMoveNum + " ");
                 for (int j = 0; j < enemyMSList.ems[i].emp.totalMoveNum; ++j)
                 {
-                    sw.WriteLine(   enemyMSList.ems[i].emp.em[j].moveId.ToString() + " " +
-                                    enemyMSList.ems[i].emp.em[j].skillId.ToString() + " " +
-                                    enemyMSList.ems[i].emp.em[j].durationTime.ToString());
-                    sw.WriteLine(   enemyMSList.ems[i].emp.em[j].animSrc.Output() + " " +
-                                    enemyMSList.ems[i].emp.em[j].basisRenderPosX.ToString() + " " +
-                                    enemyMSList.ems[i].emp.em[j].basisRenderPosY.ToString() + " " +
-                                    enemyMSList.ems[i].emp.em[j].animNum.ToString() + " " +
-                                    enemyMSList.ems[i].emp.em[j].waitTime.ToString() + " " +
-                                    enemyMSList.ems[i].emp.em[j].isRoop.ToString());
+                    sw.WriteLine(enemyMSList.ems[i].emp.em[j].moveId + " " +
+                                 enemyMSList.ems[i].emp.em[j].skillId + " " +
+                                 enemyMSList.ems[i].emp.em[j].durationTime + " ");
+                    sw.WriteLine(enemyMSList.ems[i].emp.em[j].animSrc.Output() + " " +
+                                 enemyMSList.ems[i].emp.em[j].basisRenderPosX + " " +
+                                 enemyMSList.ems[i].emp.em[j].basisRenderPosY + " " +
+                                 enemyMSList.ems[i].emp.em[j].animNum + " " +
+                                 enemyMSList.ems[i].emp.em[j].waitTime + " " +
+                                 enemyMSList.ems[i].emp.em[j].isRoop + " ");
                 }
                 
                 for (int k = 0; k < enemyMSList.totalPatternNum; ++k)
                 {
-                    sw.Write(enemyMSList.ems[i].transitionId[k].ToString() + " ");
+                    sw.Write(enemyMSList.ems[i].transitionId[k] + " ");
                 }
-                sw.WriteLine(" ");
+                sw.WriteLine("");
             }
 
             sw.Close();
             fs.Close();
+
+            MessageBox.Show(OutputFileName.Text + ".txtの出力が完了しました",
+                            "完了",
+                            MessageBoxButtons.OK);
+        }
+
+        private void ReadFile_Click(object sender, EventArgs e)
+        {
+            if (ReadFileName.Text.Length <= 0)
+            {
+                MessageBox.Show("先輩！何でファイル名書いてないんすか！\nやめてくださいよ本当に！",
+                                "ああああああ！！テメェェェ！！何してんだよァァァ！！",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Hand);
+
+                return;
+            }
+
+            enemyMSList.ems.Clear();
+
+            System.IO.StreamReader sr = null;
+            try
+            {
+                sr = new System.IO.StreamReader("readData/" + ReadFileName.Text + ".txt");
+
+                string[] txt = sr.ReadToEnd().Split(' ');
+                int tmp = 0;
+
+                TexturePath.Text = txt[tmp++];
+                TextureName.Text = txt[tmp++];
+                MaxLife.Value = decimal.Parse(txt[tmp++]);
+                HitDamage.Value = decimal.Parse(txt[tmp++]);
+                MoveSpeed.Value = decimal.Parse(txt[tmp++]);
+                JumpPower.Value = decimal.Parse(txt[tmp++]);
+                IsUseGrabity.Checked = int.Parse(txt[tmp++]) == 1;
+                
+                BaseW.Value = decimal.Parse(txt[tmp++]);
+                BaseH.Value = decimal.Parse(txt[tmp++]);
+                BaseD.Value = decimal.Parse(txt[tmp++]);
+
+                DamageCameraPosX.Value = decimal.Parse(txt[tmp++]);
+                DamageCameraPosY.Value = decimal.Parse(txt[tmp++]);
+                DamageCameraPosZ.Value = decimal.Parse(txt[tmp++]);
+                DamageCameraW.Value = decimal.Parse(txt[tmp++]);
+                DamageCameraH.Value = decimal.Parse(txt[tmp++]);
+                DamageCameraD.Value = decimal.Parse(txt[tmp++]);
+                VisibillityPosX.Value = decimal.Parse(txt[tmp++]);
+                VisibillityPosY.Value = decimal.Parse(txt[tmp++]);
+                VisibillityPosZ.Value = decimal.Parse(txt[tmp++]);
+                VisibillityW.Value = decimal.Parse(txt[tmp++]);
+                VisibillityH.Value = decimal.Parse(txt[tmp++]);
+                VisibillityD.Value = decimal.Parse(txt[tmp++]);
+                AttackTransPosX.Value = decimal.Parse(txt[tmp++]);
+                AttackTransPosY.Value = decimal.Parse(txt[tmp++]);
+                AttackTransPosZ.Value = decimal.Parse(txt[tmp++]);
+                AttackTransW.Value = decimal.Parse(txt[tmp++]);
+                AttackTransH.Value = decimal.Parse(txt[tmp++]);
+                AttackTransD.Value = decimal.Parse(txt[tmp++]);
+
+                MovePatternNum.Value = decimal.Parse(txt[tmp++]);
+                enemyMSList.totalPatternNum = (int)MovePatternNum.Value;
+                for (int i = 0; i < enemyMSList.totalPatternNum; ++i)
+                {
+                    enemyMSList.ems.Add(new EnemyMoveSetList.EnemyMoveSet());
+
+                    enemyMSList.ems[i].emp.totalMoveNum = int.Parse(txt[tmp++]);
+
+                    for (int j = 0; j < enemyMSList.ems[i].emp.totalMoveNum; ++j)
+                    {
+                        EnemyMovePattern.EnemyMove setem = new EnemyMovePattern.EnemyMove();
+                        setem.moveId = int.Parse(txt[tmp++]);
+                        setem.skillId = int.Parse(txt[tmp++]);
+                        setem.durationTime = int.Parse(txt[tmp++]);
+                        setem.animSrc.Set(int.Parse(txt[tmp++]), int.Parse(txt[tmp++]), int.Parse(txt[tmp++]), int.Parse(txt[tmp++]));
+                        setem.basisRenderPosX = float.Parse(txt[tmp++]);
+                        setem.basisRenderPosY = float.Parse(txt[tmp++]);
+                        setem.animNum = int.Parse(txt[tmp++]);
+                        setem.waitTime = int.Parse(txt[tmp++]);
+                        setem.isRoop = int.Parse(txt[tmp++]) == 1 ? 1 : 0;
+
+                        enemyMSList.ems[i].emp.em.Add(setem);
+                    }
+
+                    for (int k = 0; k < enemyMSList.totalPatternNum; ++k)
+                    {
+                        enemyMSList.ems[i].transitionId.Add(int.Parse(txt[tmp++]));
+                    }
+                }
+
+                MovePatternNum.Minimum = enemyMSList.totalPatternNum;
+                OutputFileName.Text = ReadFileName.Text;
+                readFile = true;
+
+                MessageBox.Show("読み込みが完了しました",
+                                "完了",
+                                MessageBoxButtons.OK);
+            }
+            catch
+            {
+                MessageBox.Show("指定したファイルが無いか、\n正常なファイルでない可能性が微粒子レベルで存在している…？",
+                                "データ壊れちゃ～↑う",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Hand);
+
+                return;
+            }
+
+            return;
+        }
+
+        private void MoveList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int add = MoveList.SelectedIndex;
+            if (add == MoveList.Items.Count - 1 || add < 0)
+                return;
+
+            MoveID.SelectedIndex = enemyMSList.ems[nowSettingMovePattern].emp.em[add].moveId;
+            SkillID.SelectedIndex = enemyMSList.ems[nowSettingMovePattern].emp.em[add].skillId;
+            DurationTime.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].durationTime;
+            BoxX.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animSrc.x;
+            BoxY.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animSrc.y;
+            BoxW.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animSrc.w;
+            BoxH.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animSrc.h;
+            BasisRenderX.Value = (decimal)enemyMSList.ems[nowSettingMovePattern].emp.em[add].basisRenderPosX;
+            BasisRenderY.Value = (decimal)enemyMSList.ems[nowSettingMovePattern].emp.em[add].basisRenderPosY;
+            AnimationNum.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animNum;
+            WaitTime.Value = (decimal)enemyMSList.ems[nowSettingMovePattern].emp.em[add].waitTime;
+            IsRoop.Checked = enemyMSList.ems[nowSettingMovePattern].emp.em[add].isRoop == 1;
         }
     }
 }

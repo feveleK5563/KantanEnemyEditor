@@ -59,6 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.TexturePath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.IsUseGrabity = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.AttackTransD = new System.Windows.Forms.NumericUpDown();
@@ -128,12 +129,16 @@
             this.label13 = new System.Windows.Forms.Label();
             this.lebel18 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.ReadFilePanel = new System.Windows.Forms.Panel();
+            this.ReadFile = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.ReadFileName = new System.Windows.Forms.TextBox();
             this.Message = new System.Windows.Forms.Label();
             this.CreateEnemy = new System.Windows.Forms.Button();
             this.AllReset = new System.Windows.Forms.Button();
             this.OutputFileName = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
-            this.IsUseGrabity = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VisibillityD)).BeginInit();
@@ -179,6 +184,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.BoxW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BoxY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BoxX)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            this.ReadFilePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -543,6 +550,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "各種パラメータ";
             // 
+            // IsUseGrabity
+            // 
+            this.IsUseGrabity.AutoSize = true;
+            this.IsUseGrabity.Checked = true;
+            this.IsUseGrabity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.IsUseGrabity.Location = new System.Drawing.Point(78, 195);
+            this.IsUseGrabity.Name = "IsUseGrabity";
+            this.IsUseGrabity.Size = new System.Drawing.Size(124, 19);
+            this.IsUseGrabity.TabIndex = 83;
+            this.IsUseGrabity.Text = "重力を使用する";
+            this.IsUseGrabity.UseVisualStyleBackColor = true;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -655,6 +674,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(34, 62);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1076,6 +1096,7 @@
             this.MoveList.Name = "MoveList";
             this.MoveList.Size = new System.Drawing.Size(111, 259);
             this.MoveList.TabIndex = 39;
+            this.MoveList.SelectedIndexChanged += new System.EventHandler(this.MoveList_SelectedIndexChanged);
             // 
             // ResetMove
             // 
@@ -1357,11 +1378,57 @@
             this.panel2.Size = new System.Drawing.Size(221, 50);
             this.panel2.TabIndex = 25;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.ReadFilePanel);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(873, 457);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "ファイル読み込み";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // ReadFilePanel
+            // 
+            this.ReadFilePanel.Controls.Add(this.ReadFile);
+            this.ReadFilePanel.Controls.Add(this.label38);
+            this.ReadFilePanel.Controls.Add(this.ReadFileName);
+            this.ReadFilePanel.Location = new System.Drawing.Point(182, 114);
+            this.ReadFilePanel.Name = "ReadFilePanel";
+            this.ReadFilePanel.Size = new System.Drawing.Size(478, 229);
+            this.ReadFilePanel.TabIndex = 3;
+            // 
+            // ReadFile
+            // 
+            this.ReadFile.Location = new System.Drawing.Point(180, 124);
+            this.ReadFile.Name = "ReadFile";
+            this.ReadFile.Size = new System.Drawing.Size(113, 41);
+            this.ReadFile.TabIndex = 2;
+            this.ReadFile.Text = "読み込む";
+            this.ReadFile.UseVisualStyleBackColor = true;
+            this.ReadFile.Click += new System.EventHandler(this.ReadFile_Click);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(97, 54);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(282, 30);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "読み込むファイル名\r\n（readDataフォルダ内のファイルを読み込みます）";
+            // 
+            // ReadFileName
+            // 
+            this.ReadFileName.Location = new System.Drawing.Point(106, 87);
+            this.ReadFileName.Name = "ReadFileName";
+            this.ReadFileName.Size = new System.Drawing.Size(273, 22);
+            this.ReadFileName.TabIndex = 0;
+            // 
             // Message
             // 
             this.Message.AutoSize = true;
             this.Message.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Message.Location = new System.Drawing.Point(31, 569);
+            this.Message.Location = new System.Drawing.Point(38, 551);
             this.Message.Name = "Message";
             this.Message.Size = new System.Drawing.Size(70, 17);
             this.Message.TabIndex = 88;
@@ -1403,18 +1470,6 @@
             this.label31.Size = new System.Drawing.Size(118, 15);
             this.label31.TabIndex = 92;
             this.label31.Text = "出力するファイル名";
-            // 
-            // IsUseGrabity
-            // 
-            this.IsUseGrabity.AutoSize = true;
-            this.IsUseGrabity.Checked = true;
-            this.IsUseGrabity.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.IsUseGrabity.Location = new System.Drawing.Point(78, 195);
-            this.IsUseGrabity.Name = "IsUseGrabity";
-            this.IsUseGrabity.Size = new System.Drawing.Size(124, 19);
-            this.IsUseGrabity.TabIndex = 83;
-            this.IsUseGrabity.Text = "重力を使用する";
-            this.IsUseGrabity.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1485,6 +1540,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.BoxW)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BoxY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BoxX)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.ReadFilePanel.ResumeLayout(false);
+            this.ReadFilePanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1597,6 +1655,11 @@
         private System.Windows.Forms.NumericUpDown BasisRenderX;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.CheckBox IsUseGrabity;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button ReadFile;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox ReadFileName;
+        private System.Windows.Forms.Panel ReadFilePanel;
     }
 }
 
