@@ -89,7 +89,7 @@ namespace 敵作成ツール
             public class EnemyMove
             {
                 public int moveId;
-                public int skillId;
+                public int behaviorId;
                 public int durationTime;
                 public KM_Box2D animSrc;
                 public float basisRenderPosX;
@@ -131,10 +131,6 @@ namespace 敵作成ツール
             MoveID.Items.Add("3：前方に攻撃用コリジョンを生成する");
 
             //-------------------------
-            //スキルID
-            SkillID.Items.Add("0：何もなし");
-
-            //-------------------------
             //動作遷移ID
             TransitionID.Items.Add("0：遷移しない");
             TransitionID.Items.Add("1：動作パターンが一巡したとき");
@@ -142,7 +138,6 @@ namespace 敵作成ツール
 
 
             MoveID.SelectedIndex = 0;
-            SkillID.SelectedIndex = 0;
             TransitionID.SelectedIndex = 0;
         }
 
@@ -232,6 +227,8 @@ namespace 敵作成ツール
             //以後パラメーターとコリジョンの変更は不可にする
             //ファイル読み込みもできなくする
             ParameterCollisionPanel.Enabled = false;
+            ReadFileName.Text = "";
+            ReadFilePanel.Enabled = false;
             //動作設定が可能にする
             MovePatternPanel.Enabled = true;
             CreateEnemy.Enabled = true;
@@ -247,7 +244,7 @@ namespace 敵作成ツール
             //動作の設定
             EnemyMovePattern.EnemyMove setem = new EnemyMovePattern.EnemyMove();
             setem.moveId = MoveID.SelectedIndex;
-            setem.skillId = SkillID.SelectedIndex;
+            setem.behaviorId = IsGetBehavior.Checked == true ? setem.moveId : 0;
             setem.durationTime = (int)DurationTime.Value;
             setem.animSrc.Set(BoxX.Value, BoxY.Value, BoxW.Value, BoxH.Value);
             setem.basisRenderPosX = (float)BasisRenderX.Value;
@@ -263,14 +260,14 @@ namespace 敵作成ツール
                 enemyMSList.ems[nowSettingMovePattern].emp.em.RemoveAt(add);
                 MoveList.Items.RemoveAt(add);
                 enemyMSList.ems[nowSettingMovePattern].emp.em.Insert(add, setem);
-                MoveList.Items.Insert(add, setem.moveId.ToString() + "  " + setem.skillId.ToString() + "  " + setem.durationTime.ToString());
+                MoveList.Items.Insert(add, setem.moveId.ToString() + " " + IsGetBehavior.Checked + " " + setem.durationTime.ToString());
                 MoveList.SelectedIndex = add;
             }
             else
             {
                 ++enemyMSList.ems[nowSettingMovePattern].emp.totalMoveNum;
                 enemyMSList.ems[nowSettingMovePattern].emp.em.Insert(add, setem);
-                MoveList.Items.Insert(add, setem.moveId.ToString() + "  " + setem.skillId.ToString() + "  " + setem.durationTime.ToString());
+                MoveList.Items.Insert(add, setem.moveId.ToString() + " " + IsGetBehavior.Checked + " " + setem.durationTime.ToString());
             }
 
             IsRoop.Checked = false;
@@ -318,9 +315,10 @@ namespace 敵作成ツール
             MoveList.Items.Clear();
             for (int i = 0; i < enemyMSList.ems[nowSettingMovePattern].emp.em.Count; ++i)
             {
+                bool be = enemyMSList.ems[nowSettingMovePattern].emp.em[i].behaviorId != 0 ? true : false;
                 MoveList.Items.Add(enemyMSList.ems[nowSettingMovePattern].emp.em[i].moveId.ToString() + " " +
-                                    enemyMSList.ems[nowSettingMovePattern].emp.em[i].skillId.ToString() + " " +
-                                    enemyMSList.ems[nowSettingMovePattern].emp.em[i].durationTime.ToString());
+                                   be.ToString() + " " +
+                                   enemyMSList.ems[nowSettingMovePattern].emp.em[i].durationTime.ToString());
             }
             MoveOrder.Text = enemyMSList.ems[nowSettingMovePattern].emp.em.Count.ToString();
             nowSettingMove = enemyMSList.ems[nowSettingMovePattern].emp.em.Count;
@@ -440,7 +438,7 @@ namespace 敵作成ツール
                 for (int j = 0; j < enemyMSList.ems[i].emp.totalMoveNum; ++j)
                 {
                     sw.WriteLine(enemyMSList.ems[i].emp.em[j].moveId + " " +
-                                 enemyMSList.ems[i].emp.em[j].skillId + " " +
+                                 enemyMSList.ems[i].emp.em[j].behaviorId + " " +
                                  enemyMSList.ems[i].emp.em[j].durationTime + " ");
                     sw.WriteLine(enemyMSList.ems[i].emp.em[j].animSrc.Output() + " " +
                                  enemyMSList.ems[i].emp.em[j].basisRenderPosX + " " +
@@ -530,7 +528,7 @@ namespace 敵作成ツール
                     {
                         EnemyMovePattern.EnemyMove setem = new EnemyMovePattern.EnemyMove();
                         setem.moveId = int.Parse(txt[tmp++]);
-                        setem.skillId = int.Parse(txt[tmp++]);
+                        setem.behaviorId = int.Parse(txt[tmp++]);
                         setem.durationTime = int.Parse(txt[tmp++]);
                         setem.animSrc.Set(int.Parse(txt[tmp++]), int.Parse(txt[tmp++]), int.Parse(txt[tmp++]), int.Parse(txt[tmp++]));
                         setem.basisRenderPosX = float.Parse(txt[tmp++]);
@@ -573,10 +571,13 @@ namespace 敵作成ツール
         {
             int add = MoveList.SelectedIndex;
             if (add == MoveList.Items.Count - 1 || add < 0)
+            {
+                CreateOneMove.Text = "動作を追加";
                 return;
+            }
 
             MoveID.SelectedIndex = enemyMSList.ems[nowSettingMovePattern].emp.em[add].moveId;
-            SkillID.SelectedIndex = enemyMSList.ems[nowSettingMovePattern].emp.em[add].skillId;
+            IsGetBehavior.Checked = enemyMSList.ems[nowSettingMovePattern].emp.em[add].behaviorId != 0 ? true : false;
             DurationTime.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].durationTime;
             BoxX.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animSrc.x;
             BoxY.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animSrc.y;
@@ -587,6 +588,8 @@ namespace 敵作成ツール
             AnimationNum.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animNum;
             WaitTime.Value = (decimal)enemyMSList.ems[nowSettingMovePattern].emp.em[add].waitTime;
             IsRoop.Checked = enemyMSList.ems[nowSettingMovePattern].emp.em[add].isRoop == 1;
+
+            CreateOneMove.Text = "動作を更新";
         }
     }
 }

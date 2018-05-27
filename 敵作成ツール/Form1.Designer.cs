@@ -120,8 +120,6 @@
             this.BoxY = new System.Windows.Forms.NumericUpDown();
             this.BoxX = new System.Windows.Forms.NumericUpDown();
             this.label21 = new System.Windows.Forms.Label();
-            this.SkillID = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.MoveID = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.MoveOrder = new System.Windows.Forms.Label();
@@ -139,6 +137,7 @@
             this.AllReset = new System.Windows.Forms.Button();
             this.OutputFileName = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
+            this.IsGetBehavior = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VisibillityD)).BeginInit();
@@ -998,6 +997,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.IsGetBehavior);
             this.groupBox3.Controls.Add(this.label37);
             this.groupBox3.Controls.Add(this.label36);
             this.groupBox3.Controls.Add(this.label35);
@@ -1022,8 +1022,6 @@
             this.groupBox3.Controls.Add(this.BoxY);
             this.groupBox3.Controls.Add(this.BoxX);
             this.groupBox3.Controls.Add(this.label21);
-            this.groupBox3.Controls.Add(this.SkillID);
-            this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.MoveID);
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Location = new System.Drawing.Point(28, 72);
@@ -1290,24 +1288,6 @@
             this.label21.TabIndex = 9;
             this.label21.Text = "動作の継続時間：";
             // 
-            // SkillID
-            // 
-            this.SkillID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SkillID.FormattingEnabled = true;
-            this.SkillID.Location = new System.Drawing.Point(211, 46);
-            this.SkillID.Name = "SkillID";
-            this.SkillID.Size = new System.Drawing.Size(255, 23);
-            this.SkillID.TabIndex = 8;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(11, 50);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(194, 15);
-            this.label20.TabIndex = 7;
-            this.label20.Text = "その動作中に取得できるスキル：";
-            // 
             // MoveID
             // 
             this.MoveID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1471,6 +1451,16 @@
             this.label31.TabIndex = 92;
             this.label31.Text = "出力するファイル名";
             // 
+            // IsGetBehavior
+            // 
+            this.IsGetBehavior.AutoSize = true;
+            this.IsGetBehavior.Location = new System.Drawing.Point(212, 47);
+            this.IsGetBehavior.Name = "IsGetBehavior";
+            this.IsGetBehavior.Size = new System.Drawing.Size(197, 19);
+            this.IsGetBehavior.TabIndex = 45;
+            this.IsGetBehavior.Text = "撮影時にスキルが取得できる";
+            this.IsGetBehavior.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1593,8 +1583,6 @@
         private System.Windows.Forms.Label PatternOrder;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox SkillID;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox MoveID;
         private System.Windows.Forms.Panel MovePatternPanel;
         private System.Windows.Forms.Label label26;
@@ -1660,6 +1648,7 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox ReadFileName;
         private System.Windows.Forms.Panel ReadFilePanel;
+        private System.Windows.Forms.CheckBox IsGetBehavior;
     }
 }
 
