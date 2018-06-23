@@ -96,6 +96,7 @@
             this.TransitionList = new System.Windows.Forms.ListBox();
             this.TransitionID = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.IsGetBehavior = new System.Windows.Forms.CheckBox();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -137,7 +138,6 @@
             this.AllReset = new System.Windows.Forms.Button();
             this.OutputFileName = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
-            this.IsGetBehavior = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VisibillityD)).BeginInit();
@@ -735,6 +735,11 @@
             0,
             0,
             0});
+            this.AttackTransPosZ.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.AttackTransPosZ.Name = "AttackTransPosZ";
             this.AttackTransPosZ.Size = new System.Drawing.Size(61, 22);
             this.AttackTransPosZ.TabIndex = 87;
@@ -748,6 +753,11 @@
             0,
             0,
             0});
+            this.AttackTransPosY.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.AttackTransPosY.Name = "AttackTransPosY";
             this.AttackTransPosY.Size = new System.Drawing.Size(61, 22);
             this.AttackTransPosY.TabIndex = 77;
@@ -761,6 +771,11 @@
             0,
             0,
             0});
+            this.AttackTransPosX.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.AttackTransPosX.Name = "AttackTransPosX";
             this.AttackTransPosX.Size = new System.Drawing.Size(61, 22);
             this.AttackTransPosX.TabIndex = 76;
@@ -774,6 +789,11 @@
             0,
             0,
             0});
+            this.VisibillityPosZ.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.VisibillityPosZ.Name = "VisibillityPosZ";
             this.VisibillityPosZ.Size = new System.Drawing.Size(61, 22);
             this.VisibillityPosZ.TabIndex = 75;
@@ -787,6 +807,11 @@
             0,
             0,
             0});
+            this.VisibillityPosY.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.VisibillityPosY.Name = "VisibillityPosY";
             this.VisibillityPosY.Size = new System.Drawing.Size(61, 22);
             this.VisibillityPosY.TabIndex = 74;
@@ -800,6 +825,11 @@
             0,
             0,
             0});
+            this.VisibillityPosX.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.VisibillityPosX.Name = "VisibillityPosX";
             this.VisibillityPosX.Size = new System.Drawing.Size(61, 22);
             this.VisibillityPosX.TabIndex = 73;
@@ -813,6 +843,11 @@
             0,
             0,
             0});
+            this.DamageCameraPosZ.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.DamageCameraPosZ.Name = "DamageCameraPosZ";
             this.DamageCameraPosZ.Size = new System.Drawing.Size(61, 22);
             this.DamageCameraPosZ.TabIndex = 72;
@@ -826,6 +861,11 @@
             0,
             0,
             0});
+            this.DamageCameraPosY.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.DamageCameraPosY.Name = "DamageCameraPosY";
             this.DamageCameraPosY.Size = new System.Drawing.Size(61, 22);
             this.DamageCameraPosY.TabIndex = 71;
@@ -839,6 +879,11 @@
             0,
             0,
             0});
+            this.DamageCameraPosX.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.DamageCameraPosX.Name = "DamageCameraPosX";
             this.DamageCameraPosX.Size = new System.Drawing.Size(61, 22);
             this.DamageCameraPosX.TabIndex = 70;
@@ -1031,6 +1076,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "動作・アニメーション設定";
             // 
+            // IsGetBehavior
+            // 
+            this.IsGetBehavior.AutoSize = true;
+            this.IsGetBehavior.Location = new System.Drawing.Point(212, 47);
+            this.IsGetBehavior.Name = "IsGetBehavior";
+            this.IsGetBehavior.Size = new System.Drawing.Size(197, 19);
+            this.IsGetBehavior.TabIndex = 45;
+            this.IsGetBehavior.Text = "撮影時にスキルが取得できる";
+            this.IsGetBehavior.UseVisualStyleBackColor = true;
+            // 
             // label37
             // 
             this.label37.AutoSize = true;
@@ -1067,6 +1122,11 @@
             0,
             0,
             0});
+            this.BasisRenderY.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.BasisRenderY.Name = "BasisRenderY";
             this.BasisRenderY.Size = new System.Drawing.Size(65, 22);
             this.BasisRenderY.TabIndex = 41;
@@ -1080,6 +1140,11 @@
             0,
             0,
             0});
+            this.BasisRenderX.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
             this.BasisRenderX.Name = "BasisRenderX";
             this.BasisRenderX.Size = new System.Drawing.Size(65, 22);
             this.BasisRenderX.TabIndex = 40;
@@ -1118,12 +1183,17 @@
             // 
             // DurationTime
             // 
-            this.DurationTime.Location = new System.Drawing.Point(211, 76);
+            this.DurationTime.Location = new System.Drawing.Point(211, 72);
             this.DurationTime.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
+            this.DurationTime.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
             this.DurationTime.Name = "DurationTime";
             this.DurationTime.Size = new System.Drawing.Size(65, 22);
             this.DurationTime.TabIndex = 27;
@@ -1282,11 +1352,11 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(88, 79);
+            this.label21.Location = new System.Drawing.Point(88, 75);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(117, 15);
+            this.label21.Size = new System.Drawing.Size(117, 30);
             this.label21.TabIndex = 9;
-            this.label21.Text = "動作の継続時間：";
+            this.label21.Text = "動作の継続時間：\r\n（-1で無効）";
             // 
             // MoveID
             // 
@@ -1391,11 +1461,11 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(97, 54);
+            this.label38.Location = new System.Drawing.Point(113, 54);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(282, 30);
+            this.label38.Size = new System.Drawing.Size(252, 30);
             this.label38.TabIndex = 1;
-            this.label38.Text = "読み込むファイル名\r\n（readDataフォルダ内のファイルを読み込みます）";
+            this.label38.Text = "読み込むファイル名\r\n（dataフォルダ内のファイルを読み込みます）";
             // 
             // ReadFileName
             // 
@@ -1450,16 +1520,6 @@
             this.label31.Size = new System.Drawing.Size(118, 15);
             this.label31.TabIndex = 92;
             this.label31.Text = "出力するファイル名";
-            // 
-            // IsGetBehavior
-            // 
-            this.IsGetBehavior.AutoSize = true;
-            this.IsGetBehavior.Location = new System.Drawing.Point(212, 47);
-            this.IsGetBehavior.Name = "IsGetBehavior";
-            this.IsGetBehavior.Size = new System.Drawing.Size(197, 19);
-            this.IsGetBehavior.TabIndex = 45;
-            this.IsGetBehavior.Text = "撮影時にスキルが取得できる";
-            this.IsGetBehavior.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

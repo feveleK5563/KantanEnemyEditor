@@ -126,15 +126,27 @@ namespace 敵作成ツール
             //-------------------------
             //動作ID
             MoveID.Items.Add("0：何もしない");
-            MoveID.Items.Add("1：向いている方向に移動する");
-            MoveID.Items.Add("2：ジャンプする");
-            MoveID.Items.Add("3：前方に攻撃用コリジョンを生成する");
+            MoveID.Items.Add("1：向きを変更する");
+            MoveID.Items.Add("2：向いている方向に移動する");
+            MoveID.Items.Add("3：無条件に一回だけジャンプする");
+            MoveID.Items.Add("4：前方に攻撃する");
+            MoveID.Items.Add("5：重力の有無を切り替える");
+            MoveID.Items.Add("6：重力を無効にして浮く");
+            MoveID.Items.Add("7：一時的に重力を二倍にする");
+            MoveID.Items.Add("8：一時的に重力を半分にする");
+            MoveID.Items.Add("9：空中で上下に揺れる");
+            MoveID.Items.Add("10：空中で揺れながら移動する");
+            MoveID.Items.Add("11：前方に弾を発射する");
+            MoveID.Items.Add("12：重力ありの弾を斜め上に投げる");
 
             //-------------------------
             //動作遷移ID
             TransitionID.Items.Add("0：遷移しない");
             TransitionID.Items.Add("1：動作パターンが一巡したとき");
             TransitionID.Items.Add("2：視界内にプレイヤーが入っているとき");
+            TransitionID.Items.Add("3：攻撃遷移用にプレイヤーが入っているとき");
+            TransitionID.Items.Add("4：足元が地形と接触しているとき");
+            TransitionID.Items.Add("5：視界内のプレイヤーが同一方向にいるとき");
 
 
             MoveID.SelectedIndex = 0;
@@ -269,9 +281,7 @@ namespace 敵作成ツール
                 enemyMSList.ems[nowSettingMovePattern].emp.em.Insert(add, setem);
                 MoveList.Items.Insert(add, setem.moveId.ToString() + " " + IsGetBehavior.Checked + " " + setem.durationTime.ToString());
             }
-
-            IsRoop.Checked = false;
-
+            
             ++nowSettingMove;
             MoveOrder.Text = nowSettingMove.ToString();
         }
@@ -417,7 +427,7 @@ namespace 敵作成ツール
             System.IO.StreamWriter sw = new System.IO.StreamWriter(fs);
 
             //パラメータとコリジョン
-            sw.WriteLine(enemyParamater.texturePath + " ");
+            sw.Write(enemyParamater.texturePath + " ");
             sw.WriteLine(enemyParamater.textureName + " ");
             sw.WriteLine(enemyParamater.maxLife + " " + enemyParamater.hitDamage + " " + enemyParamater.moveSpeed + " " +
                          enemyParamater.jumpPower + " " + enemyParamater.isUseGravity + " ");
@@ -480,7 +490,7 @@ namespace 敵作成ツール
             System.IO.StreamReader sr = null;
             try
             {
-                sr = new System.IO.StreamReader("readData/" + ReadFileName.Text + ".txt");
+                sr = new System.IO.StreamReader("data/" + ReadFileName.Text + ".txt");
 
                 string[] txt = sr.ReadToEnd().Split(' ');
                 int tmp = 0;
