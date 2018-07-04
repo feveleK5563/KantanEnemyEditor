@@ -138,6 +138,7 @@
             this.AllReset = new System.Windows.Forms.Button();
             this.OutputFileName = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
+            this.AcquisitionSkillID = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AttackTransW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VisibillityD)).BeginInit();
@@ -185,6 +186,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.BoxX)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.ReadFilePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AcquisitionSkillID)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -1042,6 +1044,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.AcquisitionSkillID);
             this.groupBox3.Controls.Add(this.IsGetBehavior);
             this.groupBox3.Controls.Add(this.label37);
             this.groupBox3.Controls.Add(this.label36);
@@ -1085,6 +1088,7 @@
             this.IsGetBehavior.TabIndex = 45;
             this.IsGetBehavior.Text = "撮影時にスキルが取得できる";
             this.IsGetBehavior.UseVisualStyleBackColor = true;
+            this.IsGetBehavior.CheckedChanged += new System.EventHandler(this.IsGetBehavior_CheckedChanged);
             // 
             // label37
             // 
@@ -1521,6 +1525,13 @@
             this.label31.TabIndex = 92;
             this.label31.Text = "出力するファイル名";
             // 
+            // AcquisitionSkillID
+            // 
+            this.AcquisitionSkillID.Location = new System.Drawing.Point(415, 46);
+            this.AcquisitionSkillID.Name = "AcquisitionSkillID";
+            this.AcquisitionSkillID.Size = new System.Drawing.Size(42, 22);
+            this.AcquisitionSkillID.TabIndex = 46;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1593,6 +1604,7 @@
             this.tabPage3.ResumeLayout(false);
             this.ReadFilePanel.ResumeLayout(false);
             this.ReadFilePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AcquisitionSkillID)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1709,6 +1721,7 @@
         private System.Windows.Forms.TextBox ReadFileName;
         private System.Windows.Forms.Panel ReadFilePanel;
         private System.Windows.Forms.CheckBox IsGetBehavior;
+        private System.Windows.Forms.NumericUpDown AcquisitionSkillID;
     }
 }
 

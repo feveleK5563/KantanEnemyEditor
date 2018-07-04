@@ -256,7 +256,7 @@ namespace 敵作成ツール
             //動作の設定
             EnemyMovePattern.EnemyMove setem = new EnemyMovePattern.EnemyMove();
             setem.moveId = MoveID.SelectedIndex;
-            setem.behaviorId = IsGetBehavior.Checked == true ? setem.moveId : 0;
+            setem.behaviorId = IsGetBehavior.Checked == true ? (int)AcquisitionSkillID.Value : 0;
             setem.durationTime = (int)DurationTime.Value;
             setem.animSrc.Set(BoxX.Value, BoxY.Value, BoxW.Value, BoxH.Value);
             setem.basisRenderPosX = (float)BasisRenderX.Value;
@@ -598,8 +598,21 @@ namespace 敵作成ツール
             AnimationNum.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].animNum;
             WaitTime.Value = (decimal)enemyMSList.ems[nowSettingMovePattern].emp.em[add].waitTime;
             IsRoop.Checked = enemyMSList.ems[nowSettingMovePattern].emp.em[add].isRoop == 1;
+            AcquisitionSkillID.Value = enemyMSList.ems[nowSettingMovePattern].emp.em[add].behaviorId;
 
             CreateOneMove.Text = "動作を更新";
+        }
+
+        private void IsGetBehavior_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IsGetBehavior.Checked == true)
+            {
+                AcquisitionSkillID.Value = MoveID.SelectedIndex;
+            }
+            else
+            {
+                AcquisitionSkillID.Value = 0;
+            }
         }
     }
 }

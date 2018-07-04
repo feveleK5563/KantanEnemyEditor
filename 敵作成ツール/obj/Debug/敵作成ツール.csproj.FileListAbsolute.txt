@@ -18,3 +18,13 @@ C:\Users\bunch\Desktop\ゲーム大賞\KantanEnemyEditor\敵作成ツール\obj\
 C:\Users\bunch\Desktop\ゲーム大賞\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.csproj.CoreCompileInputs.cache
 C:\Users\bunch\Desktop\ゲーム大賞\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.exe
 C:\Users\bunch\Desktop\ゲーム大賞\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.pdb
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\bin\Debug\敵作成ツール.exe.config
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\bin\Debug\敵作成ツール.exe
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\bin\Debug\敵作成ツール.pdb
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.csprojAssemblyReference.cache
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.Form1.resources
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.Properties.Resources.resources
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.csproj.GenerateResource.cache
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.csproj.CoreCompileInputs.cache
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.exe
+C:\Users\bunch\Desktop\ゲームshow\KantanEnemyEditor\敵作成ツール\obj\Debug\敵作成ツール.pdb
